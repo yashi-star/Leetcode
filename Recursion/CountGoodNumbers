@@ -1,0 +1,46 @@
+// class Solution {
+// public:
+//     int helper(long long i, long long  n){
+//     const int MOD=1e9+7;
+//          if(i==n) return 1;
+
+//          long long res=0;
+//          if(i%2==0){
+//             for(int digit:{0,2,4,6,8})
+//             res=(res+ helper(i+1,n))%MOD;
+//          }
+//          else{
+//             for(int digit:{2,3,5,7})
+//             res=(res+ helper(i+1,n))%MOD;
+//          }
+//        return res;
+//     }
+//     int countGoodNumbers(long long n) {
+//         return helper(0,n);
+//     }
+// };
+
+
+
+class Solution {
+public:
+    const long long MOD = 1e9+7;
+
+    long long modPow(long long base, long long exp) {
+        long long result = 1;
+        base %= MOD;
+        while(exp > 0) {
+            if(exp & 1) result = (result * base) % MOD;
+            base = (base * base) % MOD;
+            exp >>= 1;
+        }
+        return result;
+    }
+
+    int countGoodNumbers(long long n) {
+        long long evenCount = (n + 1) / 2;
+        long long oddCount  = n / 2;
+        long long ans = (modPow(5, evenCount) * modPow(4, oddCount)) % MOD;
+        return (int)ans;
+    }
+};
