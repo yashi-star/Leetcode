@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<string>helper(int ind,string digits,string s,string combo[],vector<string>&ans){
+        if(ind==digits.length()){
+            ans.push_back(s);
+            return ans;
+        }
+
+        int digit=digits[ind]-'0';
+        for(int i=0;i<combo[digit].length();i++){
+            helper(ind+1,digits,s+combo[digit][i],combo,ans);
+        }
+        return ans;
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string>ans;
+        string s="";
+        string combo[]={ "","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        return helper(0,digits,s,combo,ans);
+    }
+};
