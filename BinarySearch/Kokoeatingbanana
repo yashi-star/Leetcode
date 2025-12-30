@@ -1,0 +1,29 @@
+class Solution {
+public:
+    long long calculate(vector<int>& piles,int hr){
+         long long  totalhour=0;
+        for(int pile:piles){
+            totalhour+=(pile + hr - 1)/hr;
+        }
+        return totalhour;
+    }
+    int minEatingSpeed(vector<int>& piles, int hr) {
+        int maxPile= *max_element(piles.begin(),piles.end());
+        int l=1;
+        int h=maxPile;
+        int ans=maxPile;
+        while(l<=h){
+            int m=l+(h-l)/2;
+            long long totalhr=calculate(piles,m);
+
+            if(totalhr<=hr){
+            ans=m;
+            h=m-1;
+            }
+            else{
+                l=m+1;
+            }
+        }
+          return ans;
+    }
+};
